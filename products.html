@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Green Harvest</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Green Harvest</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link active">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact Us</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Products Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Our Premium Fine Beans (Green Beans)</h1>
+            <p>Discover our carefully selected collection of the finest green beans</p>
+        </div>
+    </section>
+
+    <!-- Product Carousel -->
+    <section class="product-carousel-section">
+        <div class="container">
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel-slide active">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=400&fit=crop" alt="Fresh Green Beans">
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Green Beans</h3>
+                            <p>Hand-picked, organic green beans with a crisp texture and vibrant green color. Perfect for steaming, sautéing, or adding to your favorite recipes.</p>
+                            <div class="product-features">
+                                <span class="feature-tag">Organic</span>
+                                <span class="feature-tag">Fresh</span>
+                                <span class="feature-tag">Premium Quality</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop" alt="Baby Green Beans">
+                        </div>
+                        <div class="product-info">
+                            <h3>Baby Green Beans</h3>
+                            <p>Delicate and tender baby green beans, perfect for salads and light cooking. These young beans offer a sweeter, more delicate flavor.</p>
+                            <div class="product-features">
+                                <span class="feature-tag">Tender</span>
+                                <span class="feature-tag">Sweet</span>
+                                <span class="feature-tag">Premium</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1592924357228-91a4d4c306c9?w=600&h=400&fit=crop" alt="French Green Beans">
+                        </div>
+                        <div class="product-info">
+                            <h3>French Green Beans</h3>
+                            <p>Classic French green beans with a refined taste and perfect snap. Ideal for traditional French cuisine and gourmet cooking.</p>
+                            <div class="product-features">
+                                <span class="feature-tag">Classic</span>
+                                <span class="feature-tag">Gourmet</span>
+                                <span class="feature-tag">Traditional</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop" alt="Organic Green Beans">
+                        </div>
+                        <div class="product-info">
+                            <h3>Organic Green Beans</h3>
+                            <p>Certified organic green beans grown without synthetic pesticides or fertilizers. The purest form of green beans for health-conscious consumers.</p>
+                            <div class="product-features">
+                                <span class="feature-tag">Certified Organic</span>
+                                <span class="feature-tag">Pesticide-Free</span>
+                                <span class="feature-tag">Healthy</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop" alt="Haricot Verts">
+                        </div>
+                        <div class="product-info">
+                            <h3>Haricot Verts</h3>
+                            <p>Premium haricot verts with exceptional flavor and texture. These slender green beans are perfect for elegant presentations and fine dining.</p>
+                            <div class="product-features">
+                                <span class="feature-tag">Elegant</span>
+                                <span class="feature-tag">Slender</span>
+                                <span class="feature-tag">Fine Dining</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel Controls -->
+                <button class="carousel-btn prev" onclick="changeSlide(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn next" onclick="changeSlide(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators">
+                    <span class="indicator active" onclick="currentSlide(1)"></span>
+                    <span class="indicator" onclick="currentSlide(2)"></span>
+                    <span class="indicator" onclick="currentSlide(3)"></span>
+                    <span class="indicator" onclick="currentSlide(4)"></span>
+                    <span class="indicator" onclick="currentSlide(5)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Categories -->
+    <section class="product-categories">
+        <div class="container">
+            <h2>Product Categories</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Fresh Vegetables</h3>
+                    <p>Daily harvested fresh vegetables including our premium fine beans</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Organic Products</h3>
+                    <p>Certified organic produce grown with sustainable farming practices</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h3>Bulk Orders</h3>
+                    <p>Large quantity orders for restaurants, retailers, and distributors</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Green Harvest</h3>
+                    <p>Your trusted partner for premium agricultural products and fresh fine beans.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +263 77 725 7082; Calls and WhatsApp</p>
+                    <p><i class="fas fa-envelope"></i> greenharvestzw@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Green Harvest Farm, Glendale, Mazowe, Zimbabwe</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Green Harvest. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
