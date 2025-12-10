@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker - Financial Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Budget Tracker</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="budget-tracker.html" class="nav-link active">Budget Tracker</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Budget Tracker Container -->
+    <div class="budget-tracker-container">
+        <!-- Sidebar Navigation -->
+        <aside class="tracker-sidebar">
+            <div class="sidebar-section">
+                <h3>Dashboard</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="#dashboard" class="sidebar-link active" data-section="dashboard"><i class="fas fa-chart-pie"></i> Overview</a></li>
+                    <li><a href="#transactions" class="sidebar-link" data-section="transactions"><i class="fas fa-list"></i> Transactions</a></li>
+                    <li><a href="#categories" class="sidebar-link" data-section="categories"><i class="fas fa-tags"></i> Categories</a></li>
+                    <li><a href="#budgets" class="sidebar-link" data-section="budgets"><i class="fas fa-calculator"></i> Budgets</a></li>
+                    <li><a href="#reports" class="sidebar-link" data-section="reports"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="#settings" class="sidebar-link" data-section="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <h3>Quick Actions</h3>
+                <button class="sidebar-btn" id="addTransactionBtn">
+                    <i class="fas fa-plus"></i> Add Transaction
+                </button>
+                <button class="sidebar-btn" id="exportDataBtn">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+                <button class="sidebar-btn" id="clearDataBtn">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="tracker-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="tracker-section active">
+                <div class="section-header">
+                    <h1>Dashboard Overview</h1>
+                    <div class="date-range-selector">
+                        <select id="dateRangeFilter">
+                            <option value="all">All Time</option>
+                            <option value="month">This Month</option>
+                            <option value="quarter">This Quarter</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="summary-cards">
+                    <div class="card income-card">
+                        <div class="card-icon">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Total Income</h3>
+                            <p id="totalIncome">$0.00</p>
+                            <span class="card-subtitle">Money In</span>
+                        </div>
+                    </div>
+
+                    <div class="card expense-card">
+                        <div class="card-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Total Expenses</h3>
+                            <p id="totalExpense">$0.00</p>
+                            <span class="card-subtitle">Money Out</span>
+                        </div>
+                    </div>
+
+                    <div class="card balance-card">
+                        <div class="card-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Net Balance</h3>
+                            <p id="netBalance">$0.00</p>
+                            <span class="card-subtitle">Income - Expenses</span>
+                        </div>
+                    </div>
+
+                    <div class="card savings-card">
+                        <div class="card-icon">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Savings Rate</h3>
+                            <p id="savingsRate">0%</p>
+                            <span class="card-subtitle">Percentage Saved</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>Expenses by Category</h3>
+                        <canvas id="categoryChart" width="400" height="300"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Income vs Expenses Trend</h3>
+                        <canvas id="trendChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="recent-section">
+                    <h3>Recent Transactions</h3>
+                    <div id="recentTransactions" class="recent-list">
+                        <p class="empty-message">No transactions yet. Add one to get started!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transactions Section -->
+            <section id="transactions" class="tracker-section">
+                <div class="section-header">
+                    <h1>All Transactions</h1>
+                    <button id="addTransactionBtnHeader" class="add-btn">
+                        <i class="fas fa-plus"></i> Add Transaction
+                    </button>
+                </div>
+
+                <div class="filter-section">
+                    <input type="text" id="searchTransactions" placeholder="Search transactions..." class="search-input">
+                    <select id="filterCategory" class="filter-select">
+                        <option value="">All Categories</option>
+                    </select>
+                    <select id="filterType" class="filter-select">
+                        <option value="">All Types</option>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+
+                <div class="transactions-table-wrapper">
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsTableBody">
+                            <tr class="empty-row">
+                                <td colspan="6">No transactions found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Categories Section -->
+            <section id="categories" class="tracker-section">
+                <div class="section-header">
+                    <h1>Categories</h1>
+                    <button id="addCategoryBtn" class="add-btn">
+                        <i class="fas fa-plus"></i> Add Category
+                    </button>
+                </div>
+
+                <div class="categories-grid-view">
+                    <div id="categoriesList" class="categories-list">
+                        <p class="empty-message">No categories yet. Add one to get started!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Budgets Section -->
+            <section id="budgets" class="tracker-section">
+                <div class="section-header">
+                    <h1>Budget Planning</h1>
+                    <button id="addBudgetBtn" class="add-btn">
+                        <i class="fas fa-plus"></i> Set Budget
+                    </button>
+                </div>
+
+                <div id="budgetsList" class="budgets-list">
+                    <p class="empty-message">No budgets set yet. Create one to start tracking!</p>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="tracker-section">
+                <div class="section-header">
+                    <h1>Financial Reports</h1>
+                </div>
+
+                <div class="report-filters">
+                    <select id="reportDateRange" class="filter-select">
+                        <option value="month">This Month</option>
+                        <option value="quarter">This Quarter</option>
+                        <option value="year">This Year</option>
+                    </select>
+                    <button id="generateReportBtn" class="add-btn">Generate Report</button>
+                </div>
+
+                <div class="reports-container">
+                    <div class="report-card">
+                        <h3>Monthly Summary</h3>
+                        <div id="monthlySummary" class="report-content">
+                            <p>Select a date range and generate a report</p>
+                        </div>
+                    </div>
+                    <div class="report-card">
+                        <h3>Category Breakdown</h3>
+                        <div id="categoryBreakdown" class="report-content">
+                            <p>Select a date range and generate a report</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="tracker-section">
+                <div class="section-header">
+                    <h1>Settings</h1>
+                </div>
+
+                <div class="settings-container">
+                    <div class="settings-section">
+                        <h3>Preferences</h3>
+                        <div class="setting-item">
+                            <label>Currency</label>
+                            <select id="currencySelect" class="filter-select">
+                                <option value="USD">USD ($)</option>
+                                <option value="EUR">EUR (€)</option>
+                                <option value="GBP">GBP (£)</option>
+                                <option value="JPY">JPY (¥)</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Date Format</label>
+                            <select id="dateFormatSelect" class="filter-select">
+                                <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                                <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Data Management</h3>
+                        <p class="setting-description">Export your budget data as JSON or CSV</p>
+                        <div class="button-group">
+                            <button id="exportJsonBtn" class="export-btn">Export as JSON</button>
+                            <button id="exportCsvBtn" class="export-btn">Export as CSV</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-section danger-zone">
+                        <h3>Danger Zone</h3>
+                        <p class="setting-description">These actions cannot be undone</p>
+                        <button id="clearAllDataBtn" class="delete-btn">Clear All Data</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Adding/Editing Transaction -->
+    <div id="transactionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Transaction</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="transactionForm">
+                <div class="form-group">
+                    <label for="transDate">Date</label>
+                    <input type="date" id="transDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="transDescription">Description</label>
+                    <input type="text" id="transDescription" placeholder="Enter description" required>
+                </div>
+                <div class="form-group">
+                    <label for="transCategory">Category</label>
+                    <select id="transCategory" required>
+                        <option value="">Select a category</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transType">Type</label>
+                    <select id="transType" required>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transAmount">Amount</label>
+                    <input type="number" id="transAmount" placeholder="0.00" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="transNotes">Notes (Optional)</label>
+                    <textarea id="transNotes" placeholder="Add any notes..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="modal-cancel">Cancel</button>
+                    <button type="submit" class="modal-submit">Save Transaction</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Adding/Editing Category -->
+    <div id="categoryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Category</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="categoryForm">
+                <div class="form-group">
+                    <label for="categoryName">Category Name</label>
+                    <input type="text" id="categoryName" placeholder="Enter category name" required>
+                </div>
+                <div class="form-group">
+                    <label for="categoryIcon">Icon</label>
+                    <select id="categoryIcon">
+                        <option value="fa-shopping-cart">🛒 Shopping</option>
+                        <option value="fa-utensils">🍽️ Food</option>
+                        <option value="fa-home">🏠 Housing</option>
+                        <option value="fa-car">🚗 Transportation</option>
+                        <option value="fa-heartbeat">❤️ Health</option>
+                        <option value="fa-book">📚 Education</option>
+                        <option value="fa-gamepad">🎮 Entertainment</option>
+                        <option value="fa-briefcase">💼 Work</option>
+                        <option value="fa-wallet">💰 Savings</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="categoryColor">Color</label>
+                    <input type="color" id="categoryColor" value="#4a7c59">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="modal-cancel">Cancel</button>
+                    <button type="submit" class="modal-submit">Save Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Adding/Editing Budget -->
+    <div id="budgetModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Set Budget</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="budgetForm">
+                <div class="form-group">
+                    <label for="budgetCategory">Category</label>
+                    <select id="budgetCategory" required>
+                        <option value="">Select a category</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budgetAmount">Budget Amount</label>
+                    <input type="number" id="budgetAmount" placeholder="0.00" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="budgetPeriod">Period</label>
+                    <select id="budgetPeriod" required>
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="yearly">Yearly</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budgetAlert">Alert Threshold (%)</label>
+                    <input type="number" id="budgetAlert" placeholder="80" min="0" max="100" value="80">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="modal-cancel">Cancel</button>
+                    <button type="submit" class="modal-submit">Save Budget</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Budget Tracker</h3>
+                    <p>Your comprehensive financial management tool for tracking income and expenses.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="budget-tracker.html">Budget Tracker</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><a href="#transactions">Track Transactions</a></li>
+                        <li><a href="#budgets">Budget Planning</a></li>
+                        <li><a href="#reports">Financial Reports</a></li>
+                        <li><a href="#settings">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Budget Tracker. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="budget-tracker.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
